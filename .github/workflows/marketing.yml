@@ -2,7 +2,7 @@ name: deploy-marketing
 
 on:
   push:
-    branches: ["master"]
+    branches: [ master ]
     paths:
       - 'packages/marketing/**'
 
@@ -11,7 +11,7 @@ defaults:
     working-directory: packages/marketing
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
