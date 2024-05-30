@@ -11,7 +11,7 @@ defaults:
     working-directory: packages/marketing
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:

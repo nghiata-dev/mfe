@@ -11,7 +11,7 @@ defaults:
     working-directory: packages/container
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
