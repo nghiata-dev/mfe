@@ -2,7 +2,8 @@ name: deploy-container
 
 on:
   push:
-    branches: ["master"]
+    branches:
+      - main
     paths:
       - 'packages/container/**'
 
@@ -21,51 +22,14 @@ jobs:
         env:
           PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
 
-      - uses: chrislennon/action-aws-cli@v1.1
+      - uses: shinyinc/action-aws-cli@v1.2
       - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
+          AWS_DEFAULT_REGION: REPLACE_WITH_YOUR_REGION
       - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
-# name: Deploy container to S3
-
-# on:
-#   push:
-#     branches: [ master ]  # Replace with branches you want to trigger deployment on
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest  # You can choose a different runner OS
-
-#     steps:
-#       - uses: actions/checkout@v2  # Checkout code from your repository
-
-#       # Configure AWS credentials (replace with your actual secrets)
-#       - name: Configure AWS credentials
-#         env:
-#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#         run: echo "AWS credentials configured"
-
-#       # Install the AWS CLI (v2 recommended)
-#       - name: Use AWS v2 CLI
-#         uses: aws/aws-cli@v2
-#         with:
-#           aws-version: '2.28.0'  # You can choose a different version if needed
-#           region: us-east-1  # Replace with your S3 bucket's region
-
-#       # Upload your code to the S3 bucket (replace with your bucket name and path)
-#       - name: Upload Build to S3
-#         run: aws s3 cp --recursive ./build s3://your-bucket-name/path/in/bucket/
-
-#       # Optional: Set Cache Invalidation for CloudFront Distribution (if applicable)
-#       - name: Invalidate CloudFront Cache (Optional)
-#         # ... (add steps to invalidate your CloudFront cache if you use one)
-
-# env:
-#   # Optional: Set additional environment variables if needed
+          AWS_DEFAULT_REGION: REPLACE_WITH_YOUR_REGION
