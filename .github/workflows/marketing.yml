@@ -2,8 +2,7 @@ name: deploy-marketing
 
 on:
   push:
-    branches:
-      - main
+    branches: ["master"]
     paths:
       - 'packages/marketing/**'
 
