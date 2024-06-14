@@ -36,8 +36,12 @@ export default function Header({ isSignedIn, onSignOut }) {
       <Box height={"100px"} sx={{ overflowY: "auto" }}>
         <TopBar
           language="en"
-          onChangeLanguage={(language) => {}}
-          onChangeColorMode={() => {}}
+          onChangeLanguage={(language) => {
+            // alert(language);
+          }}
+          onChangeColorMode={() => {
+            // alert("trans.functional");
+          }}
           activeItem={find(items, (item) => item.url === pathname).id}
           onClick={(url) => navigate(url)}
           items={items}

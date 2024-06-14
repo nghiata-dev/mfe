@@ -5,7 +5,7 @@ import App from "./App";
 import "../i18n";
 
 // Mount function to start up the app
-const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (el) => {
   // const history =
   //   defaultHistory ||
   //   createMemoryHistory({
@@ -19,12 +19,12 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
   // ReactDOM.render(<App history={history} />, el);
   // ReactDOM.createRoot(<App />).render(el);
   ReactDOM.createRoot(el).render(<App />);
-  // if (module.hot) {
-  //   module.hot.accept('./App', () => {
-  //     const NextApp = require('./App').default;
-  //     render(NextApp);
-  //   });
-  // }
+  if (module.hot) {
+    module.hot.accept("./App", () => {
+      const NextApp = require("./App").default;
+      render(NextApp);
+    });
+  }
 
   // return {
   //   onParentNavigate({ pathname: nextPathname }) {
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "development") {
   const devRoot = document.querySelector("#_marketing-dev-root");
 
   if (devRoot) {
-    mount(devRoot, { defaultHistory: () => {} });
+    mount(devRoot);
   }
 }
 

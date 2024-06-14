@@ -32,12 +32,20 @@ const devConfig = {
         marketing: "marketing@http://localhost:8081/remoteEntry.js",
       },
       shared: {
-        ...packageJson.dependencies,
-        "nghiata-mfe-base-components": {
-          // singleton: true,
-          // eager: false,
-          requiredVersion:
-            packageJson.dependencies["nghiata-mfe-base-components"],
+        // ...packageJson.dependencies,
+        // "nghiata-mfe-base-components": {
+        //   // singleton: true,
+        //   // eager: false,
+        //   requiredVersion:
+        //     packageJson.dependencies["nghiata-mfe-base-components"],
+        // },
+        react: {
+          singleton: true,
+          requiredVersion: "^18.2.0",
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: "^18.2.0",
         },
       },
     }),

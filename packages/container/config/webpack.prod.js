@@ -1,10 +1,7 @@
 const { merge } = require("webpack-merge");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const webpack = require("webpack");
 
 const commonConfig = require("./webpack.common");
-const packageJson = require("../package.json");
 
 const domain = process.env.PRODUCTION_DOMAIN;
 
@@ -21,19 +18,16 @@ const prodConfig = {
         marketing: "marketing@http://localhost:8081/remoteEntry.js",
       },
       shared: {
-        ...packageJson.dependencies,
-        "nghiata-mfe-base-components": {
-          // singleton: true,
-          // eager: false,
-          requiredVersion:
-            packageJson.dependencies["nghiata-mfe-base-components"],
+        react: {
+          singleton: true,
+          requiredVersion: "^18.2.0",
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: "^18.2.0",
         },
       },
     }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-    }),
-    new webpack.HotModuleReplacementPlugin(),
   ],
 };
 
