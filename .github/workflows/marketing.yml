@@ -6,6 +6,9 @@ on:
       - master
     paths:
       - 'packages/marketing/**'
+  pull_request:
+    branches:
+      - master
 
 defaults:
   run:

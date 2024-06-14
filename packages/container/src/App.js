@@ -1,27 +1,16 @@
-import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import {
-  StylesProvider,
-  createGenerateClassName,
-} from "@material-ui/core/styles";
-
-import MarketingApp from "./components/MarketingApp";
-import Header from "./components/Header";
-
-const generateClassName = createGenerateClassName({
-  productionPrefix: "co",
-});
+import React, { useState } from "react";
+import { ColorModeProvider } from "nghiata-mfe-base-components/hooks";
+import { RouterProvider } from "react-router-dom";
+import router from "../../container/config/routes";
 
 export default () => {
   return (
-    <BrowserRouter>
-      <StylesProvider generateClassName={generateClassName}>
+    <React.StrictMode>
+      <ColorModeProvider defaultTheme="dark">
         <div>
-          <Header />
-          <></>
-          <MarketingApp />
+          <RouterProvider router={router} />
         </div>
-      </StylesProvider>
-    </BrowserRouter>
+      </ColorModeProvider>
+    </React.StrictMode>
   );
 };
